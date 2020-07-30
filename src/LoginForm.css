@@ -1,0 +1,60 @@
+.LoginForm.btn:focus {
+  box-shadow: none !important;
+  background-color: rgb(187, 94, 165);
+  border-color: rgb(187, 94, 165);
+}
+
+.LoginForm.btn {
+  background-color: rgb(204, 98, 179);
+  border-color: rgb(204, 98, 179);
+}
+
+.LoginForm.btn:active {
+  background-color: rgb(187, 94, 165);
+  border-color: rgb(187, 94, 165);
+}
+.LoginForm.btn:not(:disabled):not(:disabled):active {
+  background-color: rgb(46, 186, 198) !important;
+}
+
+.LoginForm.btn:hover {
+  background-color: rgb(187, 94, 165);
+  border-color: rgb(187, 94, 165);
+  box-shadow: rgba(182, 80, 158, 0.5) 0px 3px 12px 0px !important;
+}
+
+.LoginForm.btn.btn-primary.active {
+  background-color: rgb(182, 80, 158) !important;
+  border-color: rgb(182, 80, 158) !important;
+}
+
+.btn-group button {
+  border-bottom-right-radius: 0%;
+  border-bottom-left-radius: 0%;
+}
+
+label {
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.LoginForm.submit {
+  background-color: rgb(46, 186, 198);
+  border-color: rgb(46, 186, 198);
+}
+
+.LoginForm.submit:hover {
+  background-color: rgb(46, 186, 198);
+  border-color: rgb(46, 186, 198);
+  box-shadow: rgba(46, 186, 198, 0.5) 0px 3px 12px 0px !important;
+}
+
+.LoginForm.form-control {
+  box-shadow: none !important;
+}
+
+.LoginForm.form-control:focus {
+  box-shadow: none !important;
+  border-color: rgb(187, 94, 165);
+}

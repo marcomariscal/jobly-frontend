@@ -1,0 +1,15 @@
+.Home {
+  height: calc(100vh - 150px);
+  display: flex;
+  align-items: center;
+}
+.Home a {
+  background-color: rgb(46, 186, 198);
+  border-color: rgb(46, 186, 198);
+}
+
+.Home a:hover {
+  background-color: rgb(46, 186, 198);
+  border-color: rgb(46, 186, 198);
+  box-shadow: rgba(46, 186, 198, 0.5) 0px 3px 12px 0px !important;
+}

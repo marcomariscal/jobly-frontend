@@ -1,0 +1,44 @@
+.Profile.btn:focus {
+  box-shadow: none !important;
+  background-color: rgb(182, 80, 158);
+  border-color: rgb(182, 80, 158);
+}
+
+.Profile.btn {
+  background-color: rgb(182, 80, 158);
+  border-color: rgb(182, 80, 158);
+}
+
+.Profile.btn:not(:disabled):not(:disabled):active {
+  background-color: rgb(182, 80, 158) !important;
+}
+
+.Profile.btn:hover {
+  background-color: rgb(187, 94, 165);
+  border-color: rgb(187, 94, 165);
+  box-shadow: rgba(182, 80, 158, 0.5) 0px 3px 12px 0px;
+}
+
+.Profile.btn.btn-primary.active {
+  background-color: rgb(182, 80, 158) !important;
+  border-color: rgb(182, 80, 158) !important;
+}
+
+.Profile.btn.btn-primary.disabled {
+  background-color: rgb(182, 80, 158);
+  border-color: rgb(182, 80, 158);
+  box-shadow: none;
+}
+
+.Profile {
+  color: rgb(83, 82, 82);
+}
+
+.Profile.form-control {
+  box-shadow: none !important;
+}
+
+.Profile.form-control:focus {
+  box-shadow: none !important;
+  border-color: rgb(187, 94, 165);
+}

@@ -1,0 +1,29 @@
+.Search {
+  margin-bottom: 1rem;
+  border-color: rgb(46, 186, 198);
+}
+
+.Search .form-control:focus {
+  border-color: rgb(182, 80, 158);
+  box-shadow: none;
+}
+
+.Search button:focus {
+  box-shadow: none;
+  background-color: rgb(182, 80, 158);
+  border-color: rgb(182, 80, 158);
+}
+
+.Search button {
+  background-color: rgb(182, 80, 158);
+  border-color: rgb(182, 80, 158);
+}
+.Search button:hover {
+  background-color: rgb(187, 94, 165);
+  border-color: rgb(187, 94, 165);
+  box-shadow: rgba(182, 80, 158, 0.5) 0px 3px 12px 0px !important;
+}
+
+.input-group:hover::after {
+  border-color: rgb(182, 80, 158);
+}
