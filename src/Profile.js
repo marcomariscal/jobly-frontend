@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AuthError from "./AuthError";
 import "./Profile.css";
 import JoblyApi from "./JoblyApi";
 import Alert from "./Alert";
 import Spinner from "./Spinner";
+import UserContext from "./UserContext";
 
-const Profile = ({ currentUser }) => {
+const Profile = () => {
+  const { currentUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -61,7 +63,7 @@ const Profile = ({ currentUser }) => {
   const { first_name, last_name, email, photo_url, password } = formData;
   const { messages, type } = msgs;
 
-  const render = currentUser ? (
+  const render = (
     <div className="Profile col-md-6 col-lg-4 offset-md-3 offset-lg-4">
       <div className="card">
         <div className="card-body">
@@ -162,11 +164,9 @@ const Profile = ({ currentUser }) => {
         </div>
       </div>
     </div>
-  ) : (
-    <AuthError />
   );
 
-  return <div>{currentUser !== null ? render : <Spinner />}</div>;
+  return <div>{render}</div>;
 };
 
 export default Profile;

@@ -3,7 +3,7 @@ function currencyFormat(num) {
 }
 
 function formatPct(decimal) {
-  return `${decimal * 100}%`;
+  return `${decimal.toFixed(2) * 100}%`;
 }
 
 export { currencyFormat, formatPct };
