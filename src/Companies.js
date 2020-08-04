@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import CompanyCard from "./CompanyCard";
 import Search from "./Search";
 import JoblyApi from "./JoblyApi";
 import Spinner from "./Spinner";
-import AuthError from "./AuthError";
+import CardList from "./CardList";
 
-const Companies = ({ currentUser }) => {
+const Companies = () => {
   const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getCompanies() {
-      const { companies } = await JoblyApi.getCompanies();
+      const companies = await JoblyApi.getCompanies();
       setCompanies(companies);
       setIsLoading(false);
     }
@@ -19,29 +18,15 @@ const Companies = ({ currentUser }) => {
   }, []);
 
   const searchFor = async (search) => {
-    const { companies } = await JoblyApi.getCompanies(search);
+    const companies = await JoblyApi.getCompanies(search);
     setCompanies(companies);
   };
 
-  const render = currentUser ? (
+  const render = (
     <div>
       <Search searchFor={searchFor} />
-      {companies.length === 0 ? (
-        <p className="lead">Sorry no companies match that search...</p>
-      ) : (
-        companies.map(({ handle, name, description, logo_url }) => (
-          <CompanyCard
-            key={handle}
-            handle={handle}
-            name={name}
-            description={description}
-            logo_url={logo_url}
-          />
-        ))
-      )}
+      <CardList cards={companies} />
     </div>
-  ) : (
-    <AuthError />
   );
 
   return (

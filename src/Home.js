@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "./UserContext";
 import "./Home.css";
 
-const Home = ({ currentUser }) => {
+const Home = () => {
+  const { currentUser } = useContext(UserContext);
+
   return (
     <div className="Home">
       <div className="container text-center">
@@ -11,7 +14,7 @@ const Home = ({ currentUser }) => {
         </header>
         <p className="lead">All the jobs in one, convenient place.</p>
         {currentUser ? (
-          <h2>Welcome!</h2>
+          <h2>{`Welcome ${currentUser.username}!`}</h2>
         ) : (
           <Link to="/login" className="btn btn-primary font-weight-bold">
             Login

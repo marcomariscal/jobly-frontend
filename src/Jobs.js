@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import JoblyApi from "./JoblyApi";
 import Search from "./Search";
-import Job from "./Job";
 import Spinner from "./Spinner";
-import AuthError from "./AuthError";
+import CardList from "./CardList";
 
-const Jobs = ({ companyJobs, currentUser }) => {
+const Jobs = ({ companyJobs }) => {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,7 +13,7 @@ const Jobs = ({ companyJobs, currentUser }) => {
       if (companyJobs && companyJobs.length !== 0) {
         setJobs(companyJobs);
       } else {
-        const { jobs } = await JoblyApi.getJobs();
+        const jobs = await JoblyApi.getJobs();
         setJobs(jobs);
       }
       setIsLoading(false);
@@ -23,39 +22,19 @@ const Jobs = ({ companyJobs, currentUser }) => {
   }, []);
 
   const searchFor = async (search) => {
-    const { jobs } = await JoblyApi.getJobs(search);
+    const jobs = await JoblyApi.getJobs(search);
     setJobs(jobs);
   };
 
-  const applyToJob = async (id, data) => {
-    await JoblyApi.applyToJob(id, data);
-  };
-
-  const render = currentUser ? (
+  const render = (
     <div>
       <Search searchFor={searchFor} />
-      {jobs.length === 0 ? (
-        <p className="lead">Sorry no jobs match that search...</p>
-      ) : (
-        jobs.map(({ id, title, equity, salary, state }) => (
-          <Job
-            key={id}
-            id={id}
-            title={title}
-            equity={equity}
-            salary={salary}
-            state={state}
-            applyToJob={applyToJob}
-          />
-        ))
-      )}
+      <CardList cards={jobs} />
     </div>
-  ) : (
-    <AuthError />
   );
 
   return (
-    <div className="col-md-8 offset-md-2">
+    <div className="Jobs col-md-8 offset-md-2">
       {isLoading ? (
         <div>
           <Spinner />

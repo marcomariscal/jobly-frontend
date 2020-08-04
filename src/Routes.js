@@ -1,6 +1,7 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 
+import PrivateRoute from "./PrivateRoute";
 import Home from "./Home";
 import Companies from "./Companies";
 import Company from "./Company";
@@ -8,40 +9,28 @@ import Jobs from "./Jobs";
 import Login from "./Login";
 import Profile from "./Profile";
 
-const Routes = ({
-  tokenToStorage,
-  getCurrentUser,
-  currentUser,
-  usernameToStorage,
-}) => {
-  const renderCompany = (props) => {
-    const { handle } = props.match.params;
-    return <Company handle={handle} currentUser={currentUser} />;
-  };
-
+const Routes = ({ setToken }) => {
   return (
-    <div>
+    <div className="pt-5">
       <Switch>
-        <Route exact path="/login">
-          <Login
-            tokenToStorage={tokenToStorage}
-            getCurrentUser={getCurrentUser}
-            usernameToStorage={usernameToStorage}
-          />
-        </Route>
         <Route exact path="/">
-          <Home currentUser={currentUser} />
+          <Home />
         </Route>
-        <Route exact path="/companies">
-          <Companies currentUser={currentUser} />
+        <Route exact path="/login">
+          <Login setToken={setToken} />
         </Route>
-        <Route exact path="/jobs">
-          <Jobs currentUser={currentUser} />
-        </Route>
-        <Route exact path="/companies/:handle" render={renderCompany} />
-        <Route exact path="/profile">
-          <Profile currentUser={currentUser} />
-        </Route>
+        <PrivateRoute exact path="/companies">
+          <Companies />
+        </PrivateRoute>
+        <PrivateRoute exact path="/jobs">
+          <Jobs />
+        </PrivateRoute>
+        <PrivateRoute exact path="/companies/:handle">
+          <Company />
+        </PrivateRoute>
+        <PrivateRoute exact path="/profile">
+          <Profile />
+        </PrivateRoute>
         <Redirect to="/" />
       </Switch>
     </div>

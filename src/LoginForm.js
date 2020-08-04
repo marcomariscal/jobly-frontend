@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import "./LoginForm.css";
 import Alert from "./Alert";
 
-const LoginForm = ({
-  login,
-  register,
-  messages,
-  getCurrentUser,
-  usernameToStorage,
-}) => {
+const LoginForm = ({ login, register, messages }) => {
   const [view, setView] = useState({
     activeView: "login",
   });
@@ -43,12 +37,8 @@ const LoginForm = ({
     // assess the current view and either log in or register accordingly
     if (view.activeView === "login") {
       await login(formData);
-      await getCurrentUser(formData.username);
-      usernameToStorage(formData.username);
     } else if (view.activeView === "signup") {
       await register(formData);
-      await getCurrentUser(formData.username);
-      usernameToStorage(formData.username);
     } else {
       alert("Hmmm, that didn't work. Please try again.");
     }

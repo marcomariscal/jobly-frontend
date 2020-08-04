@@ -1,57 +1,47 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import useLocalStorageState from "./hooks/useLocalStorageState";
-
+import { decode } from "jsonwebtoken";
+import "./App.css";
 import Routes from "./Routes";
 import Navigation from "./Navigation";
 import JoblyApi from "./JoblyApi";
+import UserContext from "./UserContext";
+import Spinner from "./Spinner";
+
+export const TOKEN_STORAGE_ID = "token";
 
 function App() {
-  const [user, setUser] = useState({ currentUser: null });
-  const [token, setToken] = useLocalStorageState("token", null);
-  const [username, setUsername] = useLocalStorageState("username", null);
-
-  const tokenToStorage = (token) => {
-    setToken(token);
-  };
-
-  const usernameToStorage = (username) => {
-    setUsername(username);
-  };
+  const [currentUser, setCurrentUser] = useState(null);
+  const [token, setToken] = useLocalStorageState(TOKEN_STORAGE_ID);
 
   useEffect(() => {
     async function getUser() {
-      const { user } = await JoblyApi.getUser(username);
-      setUser({ currentUser: user });
+      try {
+        const { username } = decode(token);
+        const currentUser = await JoblyApi.getUser(username);
+        setCurrentUser(currentUser);
+      } catch (e) {
+        setCurrentUser(null);
+      }
     }
     getUser();
-  }, [username, token]);
+  }, [token]);
 
-  const getCurrentUser = (username) => {
-    setUsername({ username });
+  const handleLogout = () => {
+    setCurrentUser(null);
+    setToken(null);
   };
 
-  const { currentUser } = user;
-
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Navigation
-          currentUser={currentUser}
-          setToken={setToken}
-          setCurrUser={setUser}
-        />
-        <div className="pt-5">
-          <Routes
-            tokenToStorage={tokenToStorage}
-            getCurrentUser={getCurrentUser}
-            currentUser={currentUser}
-            usernameToStorage={usernameToStorage}
-          />
+    <BrowserRouter>
+      <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+        <div className="App">
+          <Navigation logout={handleLogout} />
+          <Routes setToken={setToken} />
         </div>
-      </BrowserRouter>
-    </div>
+      </UserContext.Provider>
+    </BrowserRouter>
   );
 }
 

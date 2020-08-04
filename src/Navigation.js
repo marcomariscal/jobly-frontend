@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Navigation.css";
 import { Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
 import { NavLink } from "react-router-dom";
+import UserContext from "./UserContext";
 
-const Navigation = ({ currentUser, setToken, setCurrUser }) => {
-  const handleLogout = () => {
-    window.localStorage.clear();
-    setToken(null);
-    setCurrUser({ currentUser: null });
-  };
+const Navigation = ({ logout }) => {
+  const { currentUser } = useContext(UserContext);
 
   return (
     <div className="Navigation">
@@ -32,7 +29,7 @@ const Navigation = ({ currentUser, setToken, setCurrUser }) => {
               </NavLink>
             </NavItem>
             <NavItem className="logout mr-4">
-              <NavLink exact to="/" onClick={handleLogout}>
+              <NavLink exact to="/" onClick={logout}>
                 Logout
               </NavLink>
             </NavItem>

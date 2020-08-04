@@ -1,48 +1,42 @@
 import React, { useState, useEffect } from "react";
-import Jobs from "./Jobs";
 import JoblyApi from "./JoblyApi";
-import AuthError from "./AuthError";
+import CardList from "./CardList";
 import Spinner from "./Spinner";
+import { useParams } from "react-router-dom";
 
-const Company = ({ handle, currentUser }) => {
-  const [company, setCompany] = useState({});
-  const [companyJobs, setCompanyJobs] = useState([]);
+const Company = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function getCompany(handle) {
-      const { company } = await JoblyApi.getCompany(handle);
-      setCompany(company);
-      setIsLoading(false);
-    }
-    getCompany(handle);
-  }, [handle, setCompany]);
+  const { handle } = useParams();
+
+  const [company, setCompany] = useState(null);
+  const [companyJobs, setCompanyJobs] = useState(null);
 
   useEffect(() => {
-    async function getCompanyJobs(handle) {
-      const { jobs } = await JoblyApi.getJobs();
+    async function getCompanyAndJobs() {
+      const company = await JoblyApi.getCompany(handle);
+      const jobs = await JoblyApi.getJobs();
       const companyJobs = jobs.filter((job) => job.company_handle === handle);
+
+      setCompany(company);
       setCompanyJobs(companyJobs);
       setIsLoading(false);
     }
-    getCompanyJobs(handle);
-  }, [handle, setCompany]);
+    getCompanyAndJobs();
+  }, [handle]);
 
-  const render = currentUser ? (
-    <>
-      <h5 className="text-capitalize">{company.name}</h5>
-      <p>{company.description}</p>
-      <Jobs
-        companyJobs={companyJobs}
-        isLoading={isLoading}
-        currentUser={currentUser}
-      />
-    </>
-  ) : (
-    <AuthError />
-  );
+  const render =
+    company && companyJobs && !isLoading ? (
+      <div className="col-md-8 offset-md-2">
+        <h5 className="text-capitalize">{company.name}</h5>
+        <p>{company.description}</p>
+        <CardList cards={companyJobs} />
+      </div>
+    ) : (
+      <Spinner />
+    );
 
-  return isLoading ? <Spinner /> : render;
+  return render;
 };
 
 export default Company;

@@ -5,3 +5,21 @@
 .CompanyCard a:hover {
   text-decoration: none;
 }
+.CompanyCard {
+  max-height: 250px;
+  margin-bottom: 1rem;
+  color: rgb(83, 82, 82) !important;
+  border-radius: 0;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: 1rem;
+}
+.CompanyCard:hover {
+  opacity: 1;
+  transform: scale(1);
+  color: rgb(83, 82, 82);
+  transition-property: box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  box-shadow: rgba(182, 80, 158, 0.5) 0px 3px 12px 0px !important;
+}

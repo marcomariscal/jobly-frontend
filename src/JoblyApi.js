@@ -1,10 +1,13 @@
 import axios from "axios";
+import { TOKEN_STORAGE_ID } from "./App";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb = "get") {
-    paramsOrData._token = JSON.parse(window.localStorage.getItem("token"));
+    paramsOrData._token = JSON.parse(
+      window.localStorage.getItem(TOKEN_STORAGE_ID)
+    );
 
     console.debug("API Call:", endpoint, paramsOrData, verb);
 
@@ -28,17 +31,17 @@ class JoblyApi {
 
   static async getCompanies(params = {}) {
     let res = await this.request(`companies/`, params);
-    return res;
+    return res.companies;
   }
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
-    return res;
+    return res.company;
   }
 
   static async getJobs(params = {}) {
     let res = await this.request(`jobs/`, params);
-    return res;
+    return res.jobs;
   }
 
   static async getJob(id) {
@@ -58,7 +61,7 @@ class JoblyApi {
 
   static async getUser(username) {
     let res = await this.request(`users/${username}`);
-    return res;
+    return res.user;
   }
 
   static async updateUser(username, data) {
@@ -66,8 +69,8 @@ class JoblyApi {
     return res;
   }
 
-  static async applyToJob(id, data) {
-    let res = await this.request(`jobs/${id}/apply`, data, "post");
+  static async applyToJob(id) {
+    let res = await this.request(`jobs/${id}/apply`, {}, "post");
     return res;
   }
 }
