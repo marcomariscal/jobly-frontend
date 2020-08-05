@@ -7,6 +7,7 @@
 .Profile.btn {
   background-color: rgb(182, 80, 158);
   border-color: rgb(182, 80, 158);
+  color: white;
 }
 
 .Profile.btn:not(:disabled):not(:disabled):active {

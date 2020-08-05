@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./JobCard.css";
 import { currencyFormat, formatPct } from "./helpers";
 import JoblyApi from "./JoblyApi";
+import "./JobCard.css";
 
 const JobCard = ({ item = {} }) => {
   const { id, title, equity, salary, state } = item;
@@ -22,17 +22,17 @@ const JobCard = ({ item = {} }) => {
   const buttonRender =
     state === "applied" || isApplied ? (
       <button
+        className="btn btn-primary font-weight-bold text-uppercase float-right disabled"
         type="button"
-        className="JobCard btn btn-primary font-weight-bold text-uppercase float-right disabled"
         disabled
       >
         Applied
       </button>
     ) : (
       <button
-        onClick={handleClick}
+        className="btn btn-primary font-weight-bold text-uppercase float-right active"
         type="button"
-        className="JobCard btn btn-primary font-weight-bold text-uppercase float-right active"
+        onClick={handleClick}
         value={id}
       >
         Apply

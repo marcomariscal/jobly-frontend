@@ -8,26 +8,26 @@
   padding: 1rem;
 }
 
-.JobCard.btn,
-.JobCard.btn:focus,
-.JobCard.btn:active {
+.btn,
+.btn:focus,
+.btn:active {
   background-color: rgb(46, 186, 198);
   border-color: rgb(46, 186, 198);
   box-shadow: none;
 }
 
-.JobCard.btn:hover {
+.btn:hover {
   background-color: rgb(28, 185, 199);
   border-color: rgb(28, 185, 199);
   box-shadow: rgba(46, 186, 198, 0.5) 0px 3px 12px 0px !important;
 }
 
-.JobCard.btn.btn-primary.active {
+.btn.btn-primary.active {
   background-color: rgb(28, 185, 199) !important;
   border-color: rgb(28, 185, 199) !important;
 }
 
-.JobCard.btn.btn-primary.disabled {
+.btn.btn-primary.disabled {
   background-color: rgb(182, 80, 158);
   border-color: rgb(182, 80, 158);
   box-shadow: none !important;
